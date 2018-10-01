@@ -250,16 +250,16 @@ def test(model, device, test_loader):
 batch_size = 1
 test_batch_size = 1000
 epochs = 10
-lr = 0.01
+lr = 0.001
 momentum = 0.0
 log_interval = 1000
 
 with_privacy = True
-sigma = 4.0 #4.0
-pca_sigma = 7.0 #7.0
+sigma = 1.0 #4.0
+pca_sigma = 1.0 #7.0
 target_delta = 1e-5
 batches_per_lot = 1
-default_gradient_l2norm_bound = 4.0 #4.0
+default_gradient_l2norm_bound = 1.0 #4.0
 
 train_loader = torch.utils.data.DataLoader(
     datasets.MNIST('../data', train=True, download=True,

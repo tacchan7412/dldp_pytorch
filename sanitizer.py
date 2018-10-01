@@ -1,3 +1,4 @@
+import torch
 import utils
 import collections
 
@@ -15,10 +16,11 @@ class AmortizedGaussianSanitizer(object):
             l2norm_bound, clip = self.default_option
         l2norm_bound_ = torch.tensor(l2norm_bound).to(device)
         if clip:
-            x = BatchClipByL2norm(x, l2norm_bound_)
+            x = utils.BatchClipByL2norm(x, l2norm_bound_)
         if add_noise:
+            # accumulate privacy spending every time adding noise
             self.accountant.accumulate_privacy_spending(sigma, num_examples)
-            saned_x = AddGaussianNoise(x, sigma * l2norm_bound)
+            saned_x = utils.AddGaussianNoise(x, sigma * l2norm_bound)
         else:
             saned_x = x
 

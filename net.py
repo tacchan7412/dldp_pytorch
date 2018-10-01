@@ -11,7 +11,9 @@ class Net(nn.Module):
         self.fc2 = nn.Linear(1000, 10)
 
     def forward(self, x):
+        # flatten
         x = x.view(-1, x.size(1) * x.size(2) * x.size(3))
+        # pca projection
         x = torch.mm(x, self.U)
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
